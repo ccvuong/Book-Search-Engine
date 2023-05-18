@@ -14,6 +14,8 @@ Take a fully functioning Google Books API search engine built with a RESTful API
 
 - [Licenses 🗒](#licenses)
 
+- [Resources 💾](#resources)
+
 ## Deployed Link
 (TBA)
 
@@ -66,3 +68,6 @@ THEN I am logged out of the site and presented with a menu with the options Sear
 
 ## Licenses
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
+## Resources
+- [Starter code](https://github.com/coding-boot-camp/solid-broccoli)
