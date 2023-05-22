@@ -4,8 +4,8 @@ import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
 
-import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from `@apollo/client`;
-import { setContext } from `@apollo/client/link/context`;
+import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 
 // GraphQL server
 const httpLink = createHttpLink({
@@ -45,6 +45,6 @@ function App() {
       </Router>
     </ApolloProvider>
   );
-}
+};
 
 export default App;
