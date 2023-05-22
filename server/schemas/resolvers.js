@@ -5,8 +5,16 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        me: async () => {
+        me: async (parent, args, context) => {
+            if (context.user) {
+                const userInfo = await User
+                    .findOne({ _id: context.user._id })
+                    .select("-__v -password")
+                    .populate("books");
 
+                return userInfo;
+            }
+            throw new AuthenticationError("You are not logged in");
         },
     },
 
@@ -51,7 +59,7 @@ const resolvers = {
         if (context.user) {
             const updateUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $pull: { savedBooks: { bookId }}},
+                { $pull: { savedBooks: { bookId } } },
                 { new: true },
             );
             return updateUser;
