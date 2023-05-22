@@ -42,13 +42,13 @@ const resolvers = {
 
         saveBook: async (parent, { bookData }, context) => {
             if (context.user) {
-                const updateUser = await User.findbyIdAndUpdate(
+                const updatedUser = await User.findbyIdAndUpdate(
                     { _id: context.user._id },
                     { $addToSet: { savedBooks: bookData } },
                     { new: true },
                 )
                     .populate("books");
-                return updateUser;
+                return updatedUser;
             };
             throw new AuthenticationError("Login to save books to your library!");
         }
@@ -56,12 +56,12 @@ const resolvers = {
 
     removeBook: async (parent, { bookId }, context) => {
         if (context.user) {
-            const updateUser = await User.findOneAndUpdate(
+            const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
                 { $pull: { savedBooks: { bookId } } },
                 { new: true },
             );
-            return updateUser;
+            return updatedUser;
         };
         throw new AuthenticationError("Login to delete books from your library!");
     }
