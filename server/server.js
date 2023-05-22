@@ -27,7 +27,8 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use(routes);
 
-const startApolloServer = async () => {
+// Create a new instance of Apollo Server using GraphQL schema
+const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
   server.applyMiddleware({ app });
 

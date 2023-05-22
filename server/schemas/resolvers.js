@@ -1,18 +1,17 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Book } = require('../models');
-const { User } = require("../utils/auth");
+const { User } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
         me: async (parent, args, context) => {
             if (context.user) {
-                const userInfo = await User
+                const userData = await User
                     .findOne({ _id: context.user._id })
                     .select("-__v -password")
                     .populate("books");
 
-                return userInfo;
+                return userData;
             }
             throw new AuthenticationError("You are not logged in");
         },
@@ -25,8 +24,8 @@ const resolvers = {
                 throw new AuthenticationError("Wrong login information!");
             };
 
-            const userPW = await user.isCorrectPassword(password);
-            if (!userPW) {
+            const correctPw = await user.isCorrectPassword(password);
+            if (!correctPw) {
                 throw new AuthenticationError("Wrong password input!");
             };
 
