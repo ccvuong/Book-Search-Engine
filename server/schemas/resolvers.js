@@ -43,9 +43,21 @@ const resolvers = {
                     .populate("books");
                 return updateUser;
             };
-            throw new AuthenticationError("Login to save books to your library!")
+            throw new AuthenticationError("Login to save books to your library!");
         }
     },
+
+    removeBook: async (parent, { bookId }, context) => {
+        if (context.user) {
+            const updateUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { savedBooks: { bookId }}},
+                { new: true },
+            );
+            return updateUser;
+        };
+        throw new AuthenticationError("Login to delete books from your library!");
+    }
 
 };
 
