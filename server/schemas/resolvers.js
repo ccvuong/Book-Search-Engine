@@ -8,8 +8,7 @@ const resolvers = {
             if (context.user) {
                 const userData = await User
                     .findOne({ _id: context.user._id })
-                    .select("-__v -password")
-                    .populate("books");
+                    .select('-__v -password');
 
                 return userData;
             }
@@ -22,12 +21,12 @@ const resolvers = {
             const user = await User.findOne({ email });
             if (!user) {
                 throw new AuthenticationError("Wrong login information!");
-            };
+            }
 
             const correctPw = await user.isCorrectPassword(password);
             if (!correctPw) {
                 throw new AuthenticationError("Wrong password input!");
-            };
+            }
 
             const token = signToken(user);
             return { token, user };
@@ -51,20 +50,21 @@ const resolvers = {
                 return updatedUser;
             };
             throw new AuthenticationError("Login to save books to your library!");
+        },
+
+        removeBook: async (parent, { bookId }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { savedBooks: { bookId } } },
+                    { new: true }
+                );
+                return updatedUser;
+            }
+            throw new AuthenticationError("Login to delete books from your library!");
         }
     },
 
-    removeBook: async (parent, { bookId }, context) => {
-        if (context.user) {
-            const updatedUser = await User.findOneAndUpdate(
-                { _id: context.user._id },
-                { $pull: { savedBooks: { bookId } } },
-                { new: true },
-            );
-            return updatedUser;
-        };
-        throw new AuthenticationError("Login to delete books from your library!");
-    }
 
 };
 
