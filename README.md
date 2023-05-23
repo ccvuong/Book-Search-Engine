@@ -17,11 +17,12 @@ Take a fully functioning Google Books API search engine built with a RESTful API
 - [Resources 💾](#resources)
 
 ## Deployed Link
-(TBA)
+[Heroku Deployed Link](https://book-finder-engine.herokuapp.com/)
 
 
 ## Preview
-(TBA)
+![book search engine preview](https://github.com/ccvuong/Book-Search-Engine/assets/116984891/d9434f11-08b0-4f2e-b886-11675224886a)
+
 
 ## User Story
 ```
@@ -71,3 +72,4 @@ THEN I am logged out of the site and presented with a menu with the options Sear
 
 ## Resources
 - [Starter code](https://github.com/coding-boot-camp/solid-broccoli)
+- UC Davis bootcamp staff 🔥 🔥 🔥
